@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,36 +15,54 @@ public class MainActivity extends AppCompatActivity {
     int setHome = 0;
     int setGuest = 0;
 
+    String varHomeEndGame;
+    String varGuestEndGame;
+    int varHomePoints;
+    int varGuestPoints;
+    int varSetHome;
+    int varSetGuest;
+    long time;
+
+
+    TextView homeScore,guestScore, setPointsHome, setPointsGuest, endGame;
     Chronometer simpleChronometer;
     Button start, reset;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // initiate views
         simpleChronometer = (Chronometer) findViewById(R.id.clockTimer);
+        homeScore = (TextView) findViewById(R.id.homeScore);
+        guestScore = (TextView) findViewById(R.id.guestScore);
+        setPointsHome = (TextView) findViewById(R.id.setPointsHome);
+        setPointsGuest = (TextView) findViewById(R.id.setPointsGuest);
+        endGame = (TextView) findViewById(R.id.endGame);
         start = (Button) findViewById(R.id.buttonStart);
         reset = (Button) findViewById(R.id.buttonReset);
+
         // perform click  event on start button to start a chronometer
+
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO Auto-generated method stub
-
-
                 simpleChronometer.setBase(SystemClock.elapsedRealtime());
                 simpleChronometer.start();
-
             }
         });
 
-        // perform click  event on restart button to set the base time on chronometer
+        /**
+         *  Perform click  event on restart button to set the base time on chronometer
+         */
+
         reset.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 // TODO Auto-generated method stub
+                time =simpleChronometer.getBase()-SystemClock.elapsedRealtime();
                 simpleChronometer.stop();
                 simpleChronometer.setBase(SystemClock.elapsedRealtime());
                 displayHomePoints(0);
@@ -60,6 +77,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
+    protected void onSavedInstanceState(Bundle outState){
+        // Save myVar's value in saveInstanceState bundle
+        outState.putString("myVarEndHomeGame",endGame.getText().toString());
+        outState.putString("myVarEndGuestGame",endGame.getText().toString());
+        outState.putLong("timer",time);
+        outState.putInt("varHomePoints", home_points);
+        outState.putInt("varGuestPoints", guest_points);
+        outState.putInt("varSetHome", setHome);
+        outState.putInt("varSetGuest", setGuest);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+
+        endGame.setText(savedInstanceState.getString("myVarEndHomeGame"));
+        endGame.setText(savedInstanceState.getString("myVarEndGuestGame"));
+        home_points = savedInstanceState.getInt("varHomePoints");
+        guest_points = savedInstanceState.getInt("varGuestPoints");
+        setHome = savedInstanceState.getInt("varSetHome");
+        setGuest = savedInstanceState.getInt("varSetGuest");
+    }
     /**
      * This method is called when the +1 Point Home button is clicked.
      */
@@ -102,17 +143,16 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void displayHomePoints(int home_points) {
-        TextView scoreView = (TextView) findViewById(R.id.homeScore);
-        scoreView.setText(String.valueOf(home_points));
+        homeScore.setText(String.valueOf(home_points));
     }
+
 
     /**
      * Display guest points.
      */
 
     public void displayGuestPoints(int guest_points) {
-        TextView scoreView = (TextView) findViewById(R.id.guestScore);
-        scoreView.setText(String.valueOf(guest_points));
+        guestScore.setText(String.valueOf(guest_points));
     }
 
 
@@ -121,13 +161,13 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void displaySetHome(int setHome) {
-        TextView setView = (TextView) findViewById(R.id.setPointsHome);
-        setView.setText(String.valueOf(setHome));
+        setPointsHome.setText(String.valueOf(setHome));
         if (setHome == 3){
             displayEndGameHome("HOME WINS!");
             displaySetHome(0);
         }
-            }
+    }
+
 
 
     /**
@@ -135,8 +175,7 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void displaySetGuest(int setGuest) {
-        TextView setView = (TextView) findViewById(R.id.setPointsGuest);
-        setView.setText(String.valueOf(setGuest));
+        setPointsGuest.setText(String.valueOf(setGuest));
         if (setGuest == 3){
             displayEndGameGuest("GUEST WINS!");
             displaySetGuest(0);
@@ -145,14 +184,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Display home endGame.
+     */
+
     public void displayEndGameHome(String a){
-        TextView endView = (TextView) findViewById(R.id.endGame);
-        endView.setText(a);
+        endGame.setText(a);
     }
 
 
+    /**
+     * Display guest endGame.
+     */
     public void displayEndGameGuest(String b){
-        TextView endView = (TextView) findViewById(R.id.endGame);
-        endView.setText(b);
+        endGame.setText(b);
     }
+
+
+
+
+
 }
