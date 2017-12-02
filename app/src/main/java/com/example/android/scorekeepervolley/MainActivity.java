@@ -1,5 +1,6 @@
 package com.example.android.scorekeepervolley;
 
+import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,12 +16,6 @@ public class MainActivity extends AppCompatActivity {
     int setHome = 0;
     int setGuest = 0;
 
-    String varHomeEndGame;
-    String varGuestEndGame;
-    int varHomePoints;
-    int varGuestPoints;
-    int varSetHome;
-    int varSetGuest;
     long time;
 
 
@@ -77,12 +72,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
-    protected void onSavedInstanceState(Bundle outState){
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
         // Save myVar's value in saveInstanceState bundle
         outState.putString("myVarEndHomeGame",endGame.getText().toString());
         outState.putString("myVarEndGuestGame",endGame.getText().toString());
+        time = simpleChronometer.getBase()-SystemClock.elapsedRealtime();
+        simpleChronometer.stop();
         outState.putLong("timer",time);
         outState.putInt("varHomePoints", home_points);
         outState.putInt("varGuestPoints", guest_points);
@@ -92,14 +88,22 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
+    @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState){
-
         endGame.setText(savedInstanceState.getString("myVarEndHomeGame"));
         endGame.setText(savedInstanceState.getString("myVarEndGuestGame"));
         home_points = savedInstanceState.getInt("varHomePoints");
         guest_points = savedInstanceState.getInt("varGuestPoints");
         setHome = savedInstanceState.getInt("varSetHome");
         setGuest = savedInstanceState.getInt("varSetGuest");
+
+        homeScore.setText(String.valueOf(home_points));
+        guestScore.setText(String.valueOf(guest_points));
+        setPointsHome.setText(String.valueOf(setHome));
+        setPointsGuest.setText(String.valueOf(setGuest));
+
+        simpleChronometer.setBase(SystemClock.elapsedRealtime() + savedInstanceState.getLong("timer", 0));
+        simpleChronometer.start();
     }
     /**
      * This method is called when the +1 Point Home button is clicked.
@@ -163,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
     public void displaySetHome(int setHome) {
         setPointsHome.setText(String.valueOf(setHome));
         if (setHome == 3){
-            displayEndGameHome("HOME WINS!");
+            displayEndGameHome(getString(R.string.homeWin));
             displaySetHome(0);
         }
     }
@@ -177,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
     public void displaySetGuest(int setGuest) {
         setPointsGuest.setText(String.valueOf(setGuest));
         if (setGuest == 3){
-            displayEndGameGuest("GUEST WINS!");
+            displayEndGameGuest(getString(R.string.guestWin));
             displaySetGuest(0);
 
         }

@@ -14,10 +14,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:alpha="0.70"
+        android:alpha="0.65"
         android:scaleType="centerCrop"
-        android:src="@drawable/volley" />
-
+        android:src="@drawable/rsz_volley" />
 
     <LinearLayout
         android:id="@+id/points_linear_layout"
@@ -39,7 +38,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center_horizontal"
                 android:paddingBottom="16dp"
-                android:text="points"
+                android:text="@string/points"
                 android:textAllCaps="true"
                 android:textColor="#111111"
                 android:textSize="20sp"
@@ -52,7 +51,7 @@
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
                 android:paddingBottom="18dp"
-                android:text="0"
+                android:text="@string/zero"
                 android:textColor="#000000"
                 android:textSize="72sp"
                 android:textStyle="bold" />
@@ -65,7 +64,7 @@
                 android:gravity="center_horizontal"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:text="home"
+                android:text="@string/home"
                 android:textAllCaps="true"
                 android:textColor="#111111"
                 android:textSize="14sp"
@@ -80,7 +79,7 @@
                 android:layout_marginRight="48dp"
                 android:layout_marginTop="8dp"
                 android:onClick="addHomePoints"
-                android:text="+1 Point" />
+                android:text="@string/addPoint" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -92,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="16dp"
-                    android:text="SET"
+                    android:text="@string/set"
                     android:textColor="#111111"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -102,7 +101,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="16dp"
-                    android:text=" 0"
+                    android:paddingLeft="8dp"
+                    android:text="@string/zero"
                     android:textColor="#111111"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -131,7 +131,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center_horizontal"
                 android:paddingBottom="16dp"
-                android:text="points"
+                android:text="@string/points"
                 android:textAllCaps="true"
                 android:textColor="#111111"
                 android:textSize="20sp"
@@ -144,7 +144,7 @@
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
                 android:paddingBottom="18dp"
-                android:text="0"
+                android:text="@string/zero"
                 android:textColor="#000000"
                 android:textSize="72sp"
                 android:textStyle="bold" />
@@ -157,7 +157,7 @@
                 android:gravity="center_horizontal"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:text="guest"
+                android:text="@string/guest"
                 android:textAllCaps="true"
                 android:textColor="#111111"
                 android:textSize="14sp"
@@ -172,7 +172,7 @@
                 android:layout_marginRight="52dp"
                 android:layout_marginTop="8dp"
                 android:onClick="addGuestPoints"
-                android:text="+1 Point" />
+                android:text="@string/addPoint" />
 
 
             <LinearLayout
@@ -185,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="16dp"
-                    android:text="SET"
+                    android:text="@string/set"
                     android:textColor="#111111"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -195,7 +195,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="16dp"
-                    android:text=" 0"
+                    android:paddingLeft="8dp"
+                    android:text="@string/zero"
                     android:textColor="#111111"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -208,15 +209,19 @@
 
     <TextView
         android:id="@+id/endGame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text=" "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/buttonStart"
+        android:text=""
         android:textAllCaps="true"
         android:textColor="#F4684D"
-        android:textStyle="bold"
         android:textSize="40sp"
-        android:layout_above="@id/buttonStart"
-        android:gravity="center_horizontal"/>
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:shadowColor="#111111"
+        android:shadowDx="6"
+        android:shadowDy="4"
+        android:shadowRadius="7"/>
 
 
     <Button
@@ -226,7 +231,7 @@
         android:layout_above="@+id/clockTimer"
         android:layout_alignLeft="@+id/buttonReset"
         android:layout_alignStart="@+id/buttonReset"
-        android:text="Start" />
+        android:text="@string/start" />
 
 
     <Button
@@ -236,7 +241,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:layout_marginBottom="24dp"
-        android:text="Reset" />
+        android:text="@string/reset" />
 
     <Chronometer
         android:id="@+id/clockTimer"
@@ -245,6 +250,6 @@
         android:layout_above="@+id/buttonReset"
         android:layout_centerHorizontal="true"
         android:textColor="#000000"
-        android:textSize="32dp"
+        android:textSize="32sp"
         android:textStyle="bold" />
 </RelativeLayout>
