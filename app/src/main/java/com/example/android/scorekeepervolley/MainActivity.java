@@ -168,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
         setPointsHome.setText(String.valueOf(setHome));
         if (setHome == 3){
             displayEndGameHome(getString(R.string.homeWin));
-            displaySetHome(0);
         }
     }
 
@@ -182,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
         setPointsGuest.setText(String.valueOf(setGuest));
         if (setGuest == 3){
             displayEndGameGuest(getString(R.string.guestWin));
-            displaySetGuest(0);
 
         }
 
