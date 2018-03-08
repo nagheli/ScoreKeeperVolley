@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // TODO Auto-generated method stub
                 time =simpleChronometer.getBase()-SystemClock.elapsedRealtime();
-                simpleChronometer.setBase(SystemClock.elapsedRealtime());
                 simpleChronometer.stop();
+                simpleChronometer.setBase(SystemClock.elapsedRealtime());
                 displayHomePoints(0);
                 displayGuestPoints(0);
                 setHome = 0;
@@ -87,6 +87,42 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // Save myVar's value in saveInstanceState bundle
+        outState.putString("myVarEndHomeGame",endGame.getText().toString());
+        outState.putString("myVarEndGuestGame",endGame.getText().toString());
+        time = simpleChronometer.getBase()-SystemClock.elapsedRealtime();
+        simpleChronometer.stop();
+        outState.putLong("timer",time);
+        outState.putInt("varHomePoints", home_points);
+        outState.putInt("varGuestPoints", guest_points);
+        outState.putInt("varSetHome", setHome);
+        outState.putInt("varSetGuest", setGuest);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+        endGame.setText(savedInstanceState.getString("myVarEndHomeGame"));
+        endGame.setText(savedInstanceState.getString("myVarEndGuestGame"));
+        home_points = savedInstanceState.getInt("varHomePoints");
+        guest_points = savedInstanceState.getInt("varGuestPoints");
+        setHome = savedInstanceState.getInt("varSetHome");
+        setGuest = savedInstanceState.getInt("varSetGuest");
+
+        homeScore.setText(String.valueOf(home_points));
+        guestScore.setText(String.valueOf(guest_points));
+        setPointsHome.setText(String.valueOf(setHome));
+        setPointsGuest.setText(String.valueOf(setGuest));
+
+        simpleChronometer.setBase(SystemClock.elapsedRealtime() + savedInstanceState.getLong("timer", 0));
+        simpleChronometer.start();
+
+    }
+
 
     /**
      * This method is called when the +1 Point Home button is clicked.
