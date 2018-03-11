@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,7 +24,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dim0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -34,40 +33,37 @@
                 android:id="@+id/pointsH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="@dimen/dim100"
                 android:gravity="center_horizontal"
-                android:paddingBottom="16dp"
+                android:paddingBottom="@dimen/dim16"
                 android:text="@string/points"
                 android:textAllCaps="true"
-                android:textColor="#111111"
-                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dim20"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/homeScore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
-                android:paddingBottom="18dp"
+                android:paddingBottom="@dimen/dim18"
                 android:text="@string/zero"
-                android:textColor="#000000"
-                android:textSize="72sp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dim72"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/homeName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
                 android:gravity="center_horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+                android:paddingLeft="@dimen/dim16"
+                android:paddingRight="@dimen/dim16"
                 android:text="@string/home"
                 android:textAllCaps="true"
-                android:textColor="#111111"
-                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dim14"
                 android:textStyle="bold" />
 
 
@@ -75,9 +71,9 @@
                 android:id="@+id/plusOnePointHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="48dp"
-                android:layout_marginRight="48dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="@dimen/dim48"
+                android:layout_marginRight="@dimen/dim48"
+                android:layout_marginTop="@dimen/dim16"
                 android:onClick="addHomePoints"
                 android:text="@string/addPoint" />
 
@@ -90,34 +86,28 @@
                     android:id="@+id/setHome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="16dp"
+                    android:paddingTop="@dimen/dim16"
                     android:text="@string/set"
-                    android:textColor="#111111"
-                    android:textSize="24sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dim24"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/setPointsHome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="16dp"
-                    android:paddingLeft="8dp"
+                    android:paddingLeft="@dimen/dim16"
+                    android:paddingTop="@dimen/dim16"
                     android:text="@string/zero"
-                    android:textColor="#111111"
-                    android:textSize="24sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dim24"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
 
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="48dp"
-            android:background="@android:color/darker_gray" />
-
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dim0"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -127,40 +117,37 @@
                 android:id="@+id/pointsG"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="@dimen/dim100"
                 android:gravity="center_horizontal"
-                android:paddingBottom="16dp"
+                android:paddingBottom="@dimen/dim16"
                 android:text="@string/points"
                 android:textAllCaps="true"
-                android:textColor="#111111"
-                android:textSize="20sp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dim20"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/guestScore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
-                android:paddingBottom="18dp"
+                android:paddingBottom="@dimen/dim18"
                 android:text="@string/zero"
-                android:textColor="#000000"
-                android:textSize="72sp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dim72"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/guestName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
                 android:gravity="center_horizontal"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+                android:paddingLeft="@dimen/dim16"
+                android:paddingRight="@dimen/dim16"
                 android:text="@string/guest"
                 android:textAllCaps="true"
-                android:textColor="#111111"
-                android:textSize="14sp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dim14"
                 android:textStyle="bold" />
 
 
@@ -168,9 +155,9 @@
                 android:id="@+id/plusOnePointGuest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="52dp"
-                android:layout_marginRight="52dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginLeft="@dimen/dim48"
+                android:layout_marginRight="@dimen/dim48"
+                android:layout_marginTop="@dimen/dim16"
                 android:onClick="addGuestPoints"
                 android:text="@string/addPoint" />
 
@@ -184,21 +171,21 @@
                     android:id="@+id/setGuest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="16dp"
+                    android:paddingTop="@dimen/dim16"
                     android:text="@string/set"
-                    android:textColor="#111111"
-                    android:textSize="24sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dim24"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/setPointsGuest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="16dp"
-                    android:paddingLeft="8dp"
+                    android:paddingLeft="@dimen/dim16"
+                    android:paddingTop="@dimen/dim16"
                     android:text="@string/zero"
-                    android:textColor="#111111"
-                    android:textSize="24sp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dim24"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -212,16 +199,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/buttonStart"
-        android:text=""
-        android:textAllCaps="true"
-        android:textColor="#F4684D"
-        android:textSize="40sp"
-        android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:shadowColor="#111111"
+        android:shadowColor="@color/colorPrimary"
         android:shadowDx="6"
         android:shadowDy="4"
-        android:shadowRadius="7"/>
+        android:shadowRadius="7"
+        android:text=""
+        android:textAllCaps="true"
+        android:textColor="@color/endGame"
+        android:textSize="@dimen/dim40"
+        android:textStyle="bold" />
 
 
     <Button
@@ -240,7 +227,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="@dimen/dim60"
         android:text="@string/reset" />
 
     <Chronometer
@@ -249,7 +236,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonReset"
         android:layout_centerHorizontal="true"
-        android:textColor="#000000"
-        android:textSize="32sp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/dim32"
         android:textStyle="bold" />
 </RelativeLayout>

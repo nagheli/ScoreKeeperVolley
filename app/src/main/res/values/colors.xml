@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#FF4081</color>
     <color name="primary_material_dark_1">#533c34</color>
+    <color name="endGame">#F4684D</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.android.scorekeepervolley;
 
+import android.media.MediaPlayer;
 import android.os.PersistableBundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,11 +18,11 @@ public class MainActivity extends AppCompatActivity {
     int setGuest = 0;
 
     long time;
-
-
+    boolean startt,resett,plusOnePointHomeE,plusOnePointGuestT;
     TextView homeScore,guestScore, setPointsHome, setPointsGuest, endGame;
     Chronometer simpleChronometer;
-    Button start, reset,plusOnePointHome,plusOnePointGuest;
+    Button start, reset,plusOnePointHome,plusOnePointGuest,play;
+    MediaPlayer mP;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -42,9 +42,15 @@ public class MainActivity extends AppCompatActivity {
         reset = (Button) findViewById(R.id.buttonReset);
         plusOnePointHome.setEnabled(false);
         plusOnePointGuest.setEnabled(false);
+        plusOnePointGuestT = false;
+        plusOnePointHomeE = false;
+        startt = true;
+        resett = true;
 
-
-        ;
+        //media player
+        mP = MediaPlayer.create(MainActivity.this,R.raw.music1);
+        mP.setLooping(true);
+        mP.start();
 
         // perform click  event on start button to start a chronometer
 
@@ -56,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
                 plusOnePointHome.setEnabled(true);
                 plusOnePointGuest.setEnabled(true);
                 start.setEnabled(false);
+                plusOnePointGuestT = true;
+                plusOnePointHomeE = true;
+                resett = true;
+                startt = false;
 
             }
         });
@@ -69,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // TODO Auto-generated method stub
-                time =simpleChronometer.getBase()-SystemClock.elapsedRealtime();
+              //  time =simpleChronometer.getBase()-SystemClock.elapsedRealtime();
                 simpleChronometer.stop();
                 simpleChronometer.setBase(SystemClock.elapsedRealtime());
                 displayHomePoints(0);
@@ -83,11 +93,20 @@ public class MainActivity extends AppCompatActivity {
                 plusOnePointHome.setEnabled(false);
                 plusOnePointGuest.setEnabled(false);
                 start.setEnabled(true);
+                plusOnePointGuestT = false;
+                plusOnePointHomeE = false;
+                startt = true;
+                resett = true;
 
             }
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        mP.release();
+        super.onBackPressed();
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -101,11 +120,21 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt("varGuestPoints", guest_points);
         outState.putInt("varSetHome", setHome);
         outState.putInt("varSetGuest", setGuest);
+
+        outState.putInt("position", mP.getCurrentPosition());
+        mP.pause();
+
+
+        outState.putBoolean("start",startt);
+        outState.putBoolean("reset",resett);
+        outState.putBoolean("plusOnePointHomeE",plusOnePointHomeE);
+        outState.putBoolean("plusOnePointGuestT",plusOnePointGuestT);
+
         super.onSaveInstanceState(outState);
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState){
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
         endGame.setText(savedInstanceState.getString("myVarEndHomeGame"));
         endGame.setText(savedInstanceState.getString("myVarEndGuestGame"));
         home_points = savedInstanceState.getInt("varHomePoints");
@@ -118,11 +147,23 @@ public class MainActivity extends AppCompatActivity {
         setPointsHome.setText(String.valueOf(setHome));
         setPointsGuest.setText(String.valueOf(setGuest));
 
+        startt = savedInstanceState.getBoolean("start");
+        resett = savedInstanceState.getBoolean("reset");
+        plusOnePointHomeE = savedInstanceState.getBoolean("plusOnePointHomeE", plusOnePointHomeE);
+        plusOnePointGuestT = savedInstanceState.getBoolean("plusOnePointGuestT", plusOnePointGuestT);
+
+        int pos = savedInstanceState.getInt("position");
+        mP.seekTo(pos);
+
+        reset.setEnabled(resett);
+        start.setEnabled(startt);
+        plusOnePointHome.setEnabled(plusOnePointHomeE);
+        plusOnePointGuest.setEnabled(plusOnePointGuestT);
+
+
         simpleChronometer.setBase(SystemClock.elapsedRealtime() + savedInstanceState.getLong("timer", 0));
         simpleChronometer.start();
-
     }
-
 
     /**
      * This method is called when the +1 Point Home button is clicked.
@@ -189,7 +230,10 @@ public class MainActivity extends AppCompatActivity {
             displayEndGameHome(getString(R.string.homeWin));
             plusOnePointHome.setEnabled(false);
             plusOnePointGuest.setEnabled(false);
+            plusOnePointHomeE = false;
+            plusOnePointGuestT = false;
             simpleChronometer.stop();
+
 
 
         }
@@ -207,6 +251,8 @@ public class MainActivity extends AppCompatActivity {
             displayEndGameGuest(getString(R.string.guestWin));
             plusOnePointHome.setEnabled(false);
             plusOnePointGuest.setEnabled(false);
+            plusOnePointHomeE = false;
+            plusOnePointGuestT = false;
             simpleChronometer.stop();
 
         }
